@@ -1,0 +1,32 @@
+[
+	{
+		"mainCategory" : "국가별",
+		"subList" : ["한식","양식","일식","기타"],
+		"linkInfo" : ["ko.jsp","we.jsp","ja.jsp","etc.jsp"],
+		"pathBase" : "/country/"
+	},
+	{
+		"mainCategory" : "취향별",
+		"subList" : ["단맛","짠맛","신맛","매운맛","담백한맛"],
+		"linkInfo" : ["sweet.jsp","salty.jsp","sour.jsp","spicy.jsp","simple.jsp"],
+		"pathBase" : "/taste/"
+	},
+	{
+		"mainCategory" : "연령별",
+		"subList" : ["영유아","청소년","성인","중·장년층 이상"],
+		"linkInfo" : ["infants.jsp","teenager.jsp","adult.jsp","middle-aged.jsp"],
+		"pathBase" : "/age/"
+	},
+	{
+		"mainCategory" : "상황별",
+		"subList" : ["일상","초스피드","술안주","다이어트","소풍"],
+		"linkInfo" : ["everyDay.jsp","speed.jsp","barFood.jsp","diet.jsp","picnic.jsp"],
+		"pathBase" : "/situation/"
+	},
+	{
+		"mainCategory" : "종류별",
+		"subList" : ["메인요리","메인반찬","밑반찬","디저트","기타"],
+		"linkInfo" : ["mainDish.jsp","mainSideDish.jsp","sideDish.jsp","dessert.jsp", "etc.jsp"],
+		"pathBase" : "/kinds/"
+	}
+]

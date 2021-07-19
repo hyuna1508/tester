@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberNS">
+  
+
+  <insert id="insertMember" parameterType="member">
+  <selectKey keyProperty="memCode" resultType="int" order="BEFORE">
+   select memCode_seq.nextval from dual 
+  </selectKey>
+  <![CDATA[
+    insert into member values(
+     #{memCode},
+     #{memId},
+     #{memPwd},
+     #{memName},
+     #{memNickName},
+     #{memEmail},
+     #{memGender},
+     10,
+     sysdate,
+     sysdate,
+     #{bookMark},
+     #{memIntroduce},
+     1,
+     #{sitCode},
+     #{natCode}
+     )
+    ]]>
+  </insert>
+  <select id="selectAllMember" resultType="member">
+  select * from member
+  </select>
+  <select id="selectOneMember" resultType="member" parameterType="int">
+  select * from member where memCode = #{memCode}
+  </select>
+
+
+	<!-- 여기부터 사용 -->
+	<!-- 로그인 -->
+	<select id="login" resultType="member">
+		<![CDATA[
+		select MEMID, MEMPWD, MEMNAME, MEMNICKNAME, MEMEMAIL from member where memId=#{memId} and memPwd=#{memPwd}
+		]]>
+	</select>
+	<!-- 회원가입 -->
+	<insert id="joinMember" parameterType="member">
+		<![CDATA[
+		insert into member 
+		(memCode, memId, memPwd, memName, memNickName, memEmail, memGender, regDate)
+		values(mem_seq.nextval, #{memId},#{memPwd},#{memName},#{memNickName},#{memEmail},#{memGender}, sysdate)
+		]]>
+	</insert>
+	<!-- 아이디중복체크 -->
+	<select id="idck" resultType="int">
+	<![CDATA[
+	select count(*) from member where memId=#{memId}
+	]]>
+	</select>
+	<!--  회원 정보 조회-->
+	<select id="selectMember" resultType="member">
+	<![CDATA[
+	select * from member where memId=#{memId} and memPwd=#{memPwd}
+	]]>
+	</select>
+
+	<!-- 회원 정보 수정 -->
+  	<update id="updateMember">
+	<![CDATA[
+	update member set 
+	memPwd=#{memPwd}, memNickName=#{memNickName}, memIntroduce=#{memIntroduce}, memEmail=#{memEmail} 
+	where memPwd=#{memPwd}
+	]]>
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteMember">
+	<![CDATA[
+	delete from member where memId=#{memId} and memPwd=#{memPwd} 
+	]]>
+	</delete>
+	
+	<!-- 비밀번호 체크 -->
+	<select id="pwdCk" resultType="int">
+	<![CDATA[
+	select count(*) from member where memId=#{memId} and memPwd=#{memPwd}
+	]]>
+	</select>
+
+</mapper>

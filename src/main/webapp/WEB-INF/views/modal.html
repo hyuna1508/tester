@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/modal.css">
+    <script src="./js/jquery-3.5.1.js"></script>
+    <script src="./js/modal.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            $("#test1").on("click",function(){
+                     
+                var jeong = $("input#yire2").val();
+                var jeong2 = $("input#candy").val(jeong);
+                
+                $("div.modal_close>a").click();
+
+
+            })
+
+        });
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="candy"/>
+    <button type='button' id="modal_btn">모달창아 나와랏</button>
+    <div class="black_bg"></div>
+        <div class="modal_wrap">
+            
+            <div class="modal_close"><a href="#">close</a></div>
+        <div>
+            <input type="text" id="yire2" />
+            <button id="test1">전송</button>
+            
+        </div>
+
+    <div>
+
+</body>
+</html>

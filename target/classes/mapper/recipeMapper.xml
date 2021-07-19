@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="recipeNS">
+	<insert id="insertRecipe" parameterType="recipe">
+		<selectKey keyProperty="recipeCode" order="BEFORE" resultType="int">
+		<![CDATA[
+			select recipeCode_seq.nextval from dual
+		]]>
+		</selectKey>
+		<![CDATA[ 
+			insert into 
+			recipe(recipeCode, recipeTitle, memCode, recipeInfo, writeTime, natCode, sitCode, typeCode, ageCode, tastyCode, amount, cookTime, difficult, material, cookStep, cookTip) 
+			values(#{recipeCode}, #{recipeTitle}, (select me.memCode from member me where me.memCode=#{memCode}), #{recipeInfo}, sysdate, #{natCode}, #{sitCode}, #{typeCode}, #{ageCode}, #{tastyCode}, #{amount}, #{cookTime}, #{difficult}, #{material}, #{cookStep}, #{cookTip})
+		]]>
+	</insert>
+	<!-- 글쓴이만 수정 삭제 가능하도록: 컨트롤러로 넘기기 https://rwd337.tistory.com/168 -->
+	<update id="updateRecipe" parameterType="recipe">
+		<![CDATA[
+			update recipe
+			set recipeTitle=#{recipeTitle}, recipeInfo=#{recipeInfo}, natCode=#{natCode}, sitCode=#{natCode}, typeCode=#{typeCode}, ageCode=#{ageCode}, tastyCode=#{tastyCode}, amount=#{amount}, cookTime=#{cookTime}, difficult=#{difficult}, material=#{material}, cookStep=#{cookStep}, cookTip=#{cookTip}
+			where recipeCode=#{recipeCode}
+		]]>
+	</update>
+	<delete id="deleteRecipe" parameterType="recipe">
+		<![CDATA[
+			delete recipe where recipeCode=#{recipeCode}
+		]]>
+	</delete>
+	<!-- 수정삭제 글쓴이만 가능하도록 -->
+	
+	<select id="selectOneRecipe" resultType="recipe">
+		<![CDATA[
+		select re.recipecode, re.recipeTitle, re.recipeInfo, re.writeTime, na.natName, si.sitName, ct.typeName, ag.ageName, ts.tastyName, re.amount, re.cookTime, re.difficult, re.material, re.cookStep, re.cookTip, re.recipeCnt, (select avg(recipeStar) from reply where recipeCode=#{recipeCode})
+		from nationality na,situation si,cooktype ct, tasty ts, age ag, member me,recipe re
+		where re.natCode=na.natCode and re.sitCode=si.sitCode and re.typeCode = ct.typecode and re.tastyCode=ts.tastycode and re.ageCode=ag.agecode and re.memCode=me.memCode and recipeTitle like '%'||#{searchKeyword}||'%' 
+		order by recipeCode desc;
+		]]>
+	</select>
+	<!-- 보여야할 정보: 썸네일, 레시피 코드, 제목, 작성자 정보  -->
+	<select id="selectAllRecipe" resultType="recipe" parameterType="recipe">
+		 <![CDATA[
+			select me.memThumb, re.recipeCode, re.recipeTitle, me.memCode
+			from member me, recipe re
+			order by re.recipeCode desc;
+			]]>
+	 </select>
+	 
+	 <update id="updateRecipeCnt" parameterType="int">
+		<![CDATA[
+			update recipe set recipeCnt = nvl(recipeCnt,0)+1 where recipeCode=#{recipeCode}
+		]]>
+	</update>
+</mapper>
+

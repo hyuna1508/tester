@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="replyNS">
+  	<insert id="insertReply" parameterType="reply">
+  		<![CDATA[
+			insert into reply(replyIndex, memGrade, recipeCode, comments, commentTime, memNickName, recipeStar, memCode) 
+			values(
+			reply_seq.nextval, 
+			(select me.memGrade from member me where me.memCode=#{memCode}),
+			(select re.recipeCode from recipe re where re.memCode=#{memCode}), 
+			#{comments}, 
+			sysdate, 
+			(select me.memNickName from member me where me.memCode=#{memCode}),
+            #{recipeStar},
+            (select me.memCode from member me where me.memCode=#{memCode})
+            );
+		]]>
+  	</insert>
+  	<delete id="deleteMemberReply" parameterType="reply">
+  	<![CDATA[
+  		delete from reply where memCode=#{memCode}
+  		]]>
+  	</delete>
+  	<delete id="deleteOneReply" parameterType="reply">
+  		<![CDATA[
+		delete from reply where replyIndex=#{replyIndex}
+  		]]>
+  	</delete>
+  	<update id="updateReply" parameterType="reply">
+  		<![CDATA[
+		update reply set recipeStar=#{recipeStar}, comments=#{comments} where replyIndex=#{replyIndex}
+  		]]>
+  	</update>
+  	<!-- <update id="updateStar">
+  		update reply set recipeStar=#{recipeStar} where replyIndex=#{replyIndex}
+  	</update> -->
+  	<select id="selectAllReply" resultType="reply">
+  		<![CDATA[
+		select rp.replyIndex, mg.memGrade, re.recipeCode, rp.comments, rp.commentTime, me.memNickName 
+		from reply rp, memberGrade mg, recipe re, member me
+		where rp.memGrade=mg.memGrade and rp.recipeCode=re.recipeCode and rp.memNickName=me.memNickName and re.recipeCode= #{recipeCode} 
+		order by replyIndex desc;
+  		]]>
+  	</select>
+  </mapper>

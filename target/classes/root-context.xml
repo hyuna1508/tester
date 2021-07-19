@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<context:property-placeholder location="classpath:dbInfo.properties" />
+	<context:component-scan base-package="com.fivevsone.cookbook"></context:component-scan>
+
+	
+	<bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource">
+	  <property name="driverClassName" value="${fivevsone.driver}" />
+	  <property name="url" value="${fivevsone.url}" />
+	  <property name="username" value="${fivevsone.username}" />
+	  <property name="password" value="${fivevsone.password}" />
+	</bean>
+	
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+	   <property name="dataSource" ref="dataSource"></property>
+	   <property name="configLocation" value="classpath:mybatisConfig.xml" />
+	   <property name="mapperLocations">
+	      <list>
+	         <value>classpath:mapper/recipeMapper.xml</value> 
+	         <value>classpath:mapper/memberMapper.xml</value> 
+	      
+	      </list>
+	   </property>	 
+	</bean>
+	
+	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+	   <constructor-arg ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<property name="maxUploadSize"> 
+    	<value>50000000</value> 
+    </property>
+</bean>
+
+ </beans>

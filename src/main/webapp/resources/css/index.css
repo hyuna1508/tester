@@ -1,0 +1,261 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+.slides li {
+    list-style: none;
+}
+
+img:hover {
+  opacity: 0.5;
+}
+
+
+.line1 {
+    position: relative;
+    width: 1290px;
+    height: 400px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.line2 {
+    overflow: hidden;
+    margin-left: 60px;
+    width: 2500px;
+    height: 510px;
+}
+
+.line3 {
+    position: relative;
+    width: 1290px;
+    height: 400px;
+    margin: 0 auto;
+
+}
+
+.slides {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: left 0.5s ease-out;
+}
+
+.slides li:not(:last-child) {
+    float: left;
+    margin-right: 30px;
+}
+
+#one h2 {
+    text-align: center;
+}
+
+.nav a {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: url(./img/sprites.png) no-repeat;
+    text-indent: -99999em;
+
+}
+
+.nav a.prev {
+    background-position: 0 -20px;
+    margin-left: -750px;
+    margin-top: -30px;
+}
+
+.nav a.next {
+    background-position: -81px -20px;
+    margin-left: 680px;
+    margin-top: -30px;
+}
+
+.indicator {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.indicator a {
+    width: 8px;
+    height: 8px;
+    margin: 0 5px;
+    background: url(./img/sprites.png) no-repeat -114px -4px;
+    text-indent: -99999em;
+    margin-top: -190px;
+
+}
+
+.indicator a.active {
+    background-position: -134px -4px;
+
+}
+
+.popular {
+
+    float: left;
+    width: 500px;
+    height: 500px;
+    padding: 3px;
+    flex-wrap: wrap;
+
+}
+
+.popular a {
+    float: left;
+    width: 220px;
+    height: 220px;
+    margin: 4px;
+    text-align: center;
+}
+
+
+
+#one {
+    margin-top: -40px;
+    width: 1583px;
+    height: 500px;
+}
+
+#two {
+
+    width: 1583px;
+    height: 510px;
+    overflow: hidden;
+
+}
+
+#three {
+    width: 1583px;
+    height: 510px;
+    overflow: hidden;
+
+}
+
+#four {
+    width: 1583px;
+    height: 300px;
+    overflow: hidden;
+}
+
+.review {
+    width: 1000px;
+    overflow: hidden;
+    position: absolute;
+    float: left;
+
+}
+
+.cover {
+    width: 60%;
+    display: table-cell;
+}
+
+.cover-photo {
+    width: 100%;
+    vertical-align: top;
+}
+
+#contents {
+    display: table-cell;
+    background-color: purple;
+    width: 35%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+
+
+
+#headerWrap {
+    width: 1583px;
+    height: 130px;
+    display: inline-block;
+
+
+}
+
+#headerWrap>header {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1300px;
+
+
+}
+
+#link {
+    position: absolute;
+    top: 100px;
+    right: 10px;
+
+
+}
+
+#link img {
+    margin: 0 5px;
+
+}
+
+#logobox {
+    display: inline-block;
+    height: 200px;
+    width: 200px;
+    margin-top: 10px;
+
+}
+
+#serach {
+    text-align: center;
+    margin-left: 35%;
+    margin-top: -170px;
+}
+
+
+#serach input[type=text],
+#serach input[type=image] {
+    vertical-align: middle;
+
+}
+
+#serach input[type=image] {
+    margin-left: -40px;
+    margin-top: 10px;
+    float: left;
+
+}
+
+#serach input[type=text] {
+    border: none;
+    border-bottom: 2px solid #000;
+    padding: 0 10px;
+    width: 400px;
+    height: 50px;
+    line-height: 50px;
+    box-sizing: border-box;
+    float: left;
+}
+
+.lately {
+    position: relative;
+    width: 1300px;
+    margin-left: auto;
+    height: 300px;
+    overflow: hidden;
+}
+
+#four h3 {
+    text-align: center;
+
+}
